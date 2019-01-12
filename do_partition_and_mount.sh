@@ -1,6 +1,7 @@
 #!/bin/bash
 # encoding: utf-8
 # credits & src: https://gist.github.com/magnunleno/3641682
+# This script: https://goo.gl/jiRoPh
 
 # Partition Scheme-1
 # I have 500 GB HDD
