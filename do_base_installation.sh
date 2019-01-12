@@ -33,6 +33,8 @@ echo "Running pactrap grub-bios $EXTRA_PKGS"
 pacstrap /mnt grub `echo $EXTRA_PKGS`
 echo "Running genfstab"
 genfstab -p /mnt >> /mnt/etc/fstab
+echo "Installing wifi"
+pacstrap /mnt dialog wpa_supplicant
 
 
 #### Enters in the new system (chroot)
