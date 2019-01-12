@@ -30,7 +30,7 @@ pacman-key --init; pacman-key --populate archlinux; pacman-key --refresh-keys
 echo "Running pactrap base base-devel"
 pacstrap /mnt base base-devel
 echo "Running pactrap grub-bios $EXTRA_PKGS"
-pacstrap /mnt grub `echo $EXTRA_PKGS`
+pacstrap /mnt grub-bios `echo $EXTRA_PKGS`
 echo "Running genfstab"
 genfstab -p /mnt >> /mnt/etc/fstab
 echo "Installing wifi"
@@ -63,14 +63,15 @@ echo 'LC_COLLATE=C' >> /etc/locale.conf
 echo 'LC_TIME='$LANGUAGE'.utf-8' >> /etc/locale.conf
 
 # Setup clock (date and time)
+unlink /etc/localtime
 ln -s /usr/share/zoneinfo/$LOCALE /etc/localtime
 echo $LOCALE > /etc/timezone
 hwclock --systohc --utc
 
 # Setup the network (DHCP via eth0)
-cp /etc/rc.conf /etc/rc.conf.bkp
-sed 's/^# interface=/interface=eth0/' /etc/rc.conf > /tmp/rc.conf
-mv /tmp/rc.conf /etc/rc.conf
+#cp /etc/rc.conf /etc/rc.conf.bkp
+#sed 's/^# interface=/interface=eth0/' /etc/rc.conf > /tmp/rc.conf
+#mv /tmp/rc.conf /etc/rc.conf
 
 # Setup initial ramdisk environment
 mkinitcpio -p linux
