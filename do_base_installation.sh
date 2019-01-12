@@ -1,7 +1,7 @@
 #!/bin/bash
 # encoding: utf-8
+# https://goo.gl/gfPFgb
 set -x
-
 HOSTN=Singularity
 KEYBOARD_LAYOUT=us
 LANGUAGE=en_US
@@ -23,10 +23,14 @@ then
 
 fi
 
+echo "Refreshing pacman keys, this will take some time"
+
+pacman-key --init; pacman-key --populate archlinux; pacman-key --refresh-keys
+
 echo "Running pactrap base base-devel"
 pacstrap /mnt base base-devel
 echo "Running pactrap grub-bios $EXTRA_PKGS"
-pacstrap /mnt grub-bios `echo $EXTRA_PKGS`
+pacstrap /mnt grub `echo $EXTRA_PKGS`
 echo "Running genfstab"
 genfstab -p /mnt >> /mnt/etc/fstab
 
@@ -77,6 +81,6 @@ grub-mkconfig -o /boot/grub/grub.cfg
 echo -e $ROOT_PASSWD"\n"$ROOT_PASSWD | passwd
 EOF
 
-echo "Umounting partitions"
-umount /mnt/{boot,home,}
-reboot
+echo "Next Action: Umounting partitions and rebooting"
+echo "umount /mnt/{boot,home,}"
+echo "reboot"

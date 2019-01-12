@@ -115,4 +115,7 @@ mount $DEVBOOT /mnt/boot
 mkdir /mnt/home
 mount $DEVHOME /mnt/home
 
-echo "Partitioning and mounting is done."
+wget https://goo.gl/gfPFgb -O base_install.sh
+chmod +x base_install.sh
+
+echo "Partitioning and mounting is done. Downloaded base_install.sh too."
